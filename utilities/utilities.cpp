@@ -102,7 +102,13 @@ int readFile(std::string &file, std::vector<KP::studentData> &allstudentData, ch
  *         SUCCESS
  */
 int calculateFinalGrade(std::vector<KP::studentData> &allstudentData) {
-	return 0;
+	if(allstudentData.empty()){
+		return KP::VECTOR_CONTAINS_NO_STUDENTS;
+	}
+	for(int i=0;i<allstudentData.size();i++) {
+		allstudentData[i].finalgrade = (allstudentData[i].midterm1 + allstudentData[i].midterm2)/2.0;
+	}
+	return KP::SUCCESS;
 }
 
 /***
@@ -116,7 +122,15 @@ int calculateFinalGrade(std::vector<KP::studentData> &allstudentData) {
  *         SUCCESS
  */
 int writeFile(std::string &file, std::vector<KP::studentData> &allstudentData, char separator_char) {
-	return 0;
+	if(allstudentData.empty()){
+		return KP::VECTOR_CONTAINS_NO_STUDENTS;
+	}
+	std::ofstream my_output_file;
+	my_output_file.open(file.c_str(), std::ios::out);
+	if(!my_output_file.is_open()){
+		return KP::COULD_NOT_OPEN_FILE;
+	}
+	return KP::SUCCESS;
 }
 
 /***
@@ -127,5 +141,8 @@ int writeFile(std::string &file, std::vector<KP::studentData> &allstudentData, c
  *         SUCCESS
  */
 int sortStudentData(std::vector<KP::studentData> &allstudentData,KP::SORT_TYPE st) {
-	return 0;
+	if(allstudentData.empty()){
+		return KP::VECTOR_CONTAINS_NO_STUDENTS;
+	}
+	return KP::SUCCESS;
 }
