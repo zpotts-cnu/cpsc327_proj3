@@ -13,17 +13,16 @@
 #include "../includes/constants.h"
 #include "../includes/utilities.h"
 #include "../includes/test.h"
-using namespace std;
 
 int main() {
 
 #ifdef TEST
 	test();
 #else
-	string infile = KP::ORIGINAL_STUDENT_DATA;
-	string outfile = KP::CALCULATED_STUDENT_DATA;
+	std::string infile = KP::ORIGINAL_STUDENT_DATA;
+	std::string outfile = KP::CALCULATED_STUDENT_DATA;
 	
-	vector<KP::studentData> allstudentData;
+	std::vector<KP::studentData> allstudentData;
 
 	int iret=readFile(infile,allstudentData);
 	if(iret != KP::SUCCESS)
