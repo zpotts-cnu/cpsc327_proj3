@@ -49,7 +49,50 @@ double stringToDouble(const char *myString) {
 *         SUCCESS
 */
 int readFile(std::string &file, std::vector<KP::studentData> &allstudentData, char separator_char){
-	return 0;
+	std::ifstream my_input_file; // Creates ifstream
+	my_input_file.open(file.c_str(), std::ios::in); // Opens file
+	if (!my_input_file.is_open()) { // File was not opened
+		return KP::COULD_NOT_OPEN_FILE;
+	}
+	// Read Contents of file and *Print to console*
+	std::string line;
+	std::stringstream lineStream;
+	std::string item;
+	KP::studentData myStudentData;
+
+	while(!my_input_file.eof()) {
+		std::getline(my_input_file, line);
+		lineStream.clear();  // Clears stringstream of old data
+		myStudentData.clear(); // Clears myStudentData of old values
+		lineStream.str(line);
+		//get the name
+		std::getline(lineStream, myStudentData.name, separator_char);
+		//get the midterm1 grade
+		std::getline(lineStream, item, separator_char);
+		myStudentData.midterm1 = stringToDouble(item.c_str());
+		//get the midterm2 grade
+		std::getline(lineStream, item, separator_char);
+		myStudentData.midterm2 = stringToDouble(item.c_str());
+		//get the final grade if it exists
+		if (std::getline(lineStream, item, separator_char)) {
+			myStudentData.finalgrade = stringToDouble(item.c_str());
+		}
+		allstudentData.push_back(myStudentData);
+	}
+//Code below is previously used methods
+//	while(std::getline(my_input_file, line)) {
+//		lineStream.clear();
+//		lineStream.str(line); //Line in file
+//		while(std::getline(lineStream, item, separator_char)) { //item is each item in the line (items split from line by delimiter)
+//			std::cout<<"Item in line: "<<item<<std::endl;
+//		}
+//	}
+//	while(!my_input_file.eof()) {
+//		getline(my_input_file, line);
+//		std::cout<<line<<std::endl;
+//	}
+	my_input_file.close();
+	return KP::SUCCESS;
 }
 
 /***

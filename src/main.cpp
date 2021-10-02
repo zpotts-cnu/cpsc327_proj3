@@ -31,7 +31,7 @@ int main() {
 	//ignoring return types
 	calculateFinalGrade(allstudentData);
 	sortStudentData(allstudentData,KP::FINAL_GRADE);
-	
+
 	iret = writeFile(outfile,allstudentData);
 	
     return iret; 
