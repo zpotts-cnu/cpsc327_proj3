@@ -130,6 +130,15 @@ int writeFile(std::string &file, std::vector<KP::studentData> &allstudentData, c
 	if(!my_output_file.is_open()){
 		return KP::COULD_NOT_OPEN_FILE;
 	}
+	for(int i=0;i<allstudentData.size();i++){
+		if(i==0){
+			my_output_file<<allstudentData[i].name<<" "<<allstudentData[i].midterm1<<" "<<allstudentData[i].midterm2<<" "<<allstudentData[i].finalgrade;
+		}
+		else{
+			my_output_file<<"\n"<<allstudentData[i].name<<" "<<allstudentData[i].midterm1<<" "<<allstudentData[i].midterm2<<" "<<allstudentData[i].finalgrade;
+		}
+	}
+	my_output_file.close();
 	return KP::SUCCESS;
 }
 
